@@ -19,7 +19,11 @@ import matplotlib.pyplot as plt
 # Specify fullpath to csv
 # i.e. csv downloaded from Seabird Tracking Database
 input_csv_folder = 'C:/Users/s44ba/Documents/Training/Northeastern/AdvSpatialAnalysis/Project/Data/fromSeabirdTrackingNetwork/'
-input_csv_filename = 'Dataset_1044__Black-legged_Kittiwake_Grumant_GLS_2009_2010_2011.csv'
+#input_csv_filename = 'Dataset_1044__Black-legged_Kittiwake_Grumant_GLS_2009_2010_2011.csv'
+#input_csv_filename = 'Dataset_1038__Black-legged_Kittiwake_Anda_GLS_2009_2010_2011.csv'
+#input_csv_filename = 'Dataset_1041__Black-legged_Kittiwake_Bulbjerg_GLS_2009_2010_2011.csv'
+#input_csv_filename = 'Dataset_1043__Black-legged_Kittiwake_Faroe_Islands_GLS_2009_2010.csv'
+input_csv_filename = 'Dataset_1049__Black-legged_Kittiwake_Kippaku_GLS_2008_2009_2010_2011.csv'
 input_csv_fullpath = input_csv_folder + input_csv_filename
 df = pd.read_csv(input_csv_fullpath)
 df.info()
@@ -33,7 +37,11 @@ grouped_df = df.groupby('bird_id')
 grouped_df.describe()
 
 # Look at a single bird's track(s)
-this_bird_id = 8840
+#this_bird_id = 8840
+#this_bird_id = 8987
+#this_bird_id = 8980
+#this_bird_id = 13105
+this_bird_id = 8521
 these_tracks = df[df['bird_id']==this_bird_id]
 
 # Extract arrays 
