@@ -7,7 +7,7 @@ from datetime import datetime, timedelta
 import numpy as np
 
 
-def get_stops_and_transits_per_csv(input_csv_fullpath):
+def get_gdf_with_speed(input_csv_fullpath, speed_min, speed_max):
 
     # Read csv file into pandas dataframe
     df = pd.read_csv(input_csv_fullpath)
@@ -33,7 +33,7 @@ def get_stops_and_transits_per_csv(input_csv_fullpath):
 
     # Before converting to movingpandas, we need to set index to timestamp_datetime
     gdf_subset.set_index('timestamp_datetime')
-    print(gdf_subset.head())
+    #print(gdf_subset.head())
 
     # Show unique bird ids
     unique_bird_ids = gdf_subset["bird_id"].unique()
@@ -48,17 +48,14 @@ def get_stops_and_transits_per_csv(input_csv_fullpath):
 
     # Now that we have speed, convert back to geodataframe, where we can filter it more easily
     gdf_with_speed = tc.to_point_gdf()
-    print(gdf_with_speed.describe())
+    #print(gdf_with_speed.describe())
 
     # Filter gdf to get "stops"
-    gdf_stops = gdf_with_speed[gdf_with_speed["speed"]<0.5]
-    print(gdf_stops.describe())
-    print(gdf_stops["bird_id"].unique())
+    gdf_with_speed_filtered = gdf_with_speed[gdf_with_speed["speed"].between(speed_min,speed_max)]
+    #print(gdf_with_speed_filtered.describe())
+    #print(gdf_with_speed_filtered["bird_id"].unique())
 
-    # Filter gdf to get "transit"
-    gdf_transit = gdf_with_speed[gdf_with_speed["speed"].between(10,20)]
-
-    return gdf_stops, gdf_transit
+    return gdf_with_speed_filtered
 
 
 

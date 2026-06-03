@@ -11,4 +11,6 @@ input_csv_filename = 'Dataset_1044__Black-legged_Kittiwake_Grumant_GLS_2009_2010
 input_csv_fullpath = input_csv_folder + input_csv_filename
 
 # Call functions
-project_functions.get_stops_and_transits_per_csv(input_csv_fullpath)
+speed_min = 0.0
+speed_max = 1.0
+gdf_stops = project_functions.get_gdf_with_speed(input_csv_fullpath, speed_min, speed_max)
